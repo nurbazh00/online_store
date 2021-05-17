@@ -39,7 +39,8 @@ class Product (models.Model):
                                  related_name='products',
                                  null=True)
     pictures = models.ManyToManyField(to=Picture,
-                                      related_name='product_pictures')
+                                      related_name='product_pictures',
+                                      blank=True)
 
 
     class Meta:
