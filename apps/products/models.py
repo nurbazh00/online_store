@@ -54,7 +54,8 @@ class Product (models.Model):
 
 class Rating (models.Model):
     star = models.SmallIntegerField(verbose_name='Количество звезд')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+    product = models.ForeignKey(to=Product,
+                                on_delete=models.CASCADE,
                                 related_name='ratings')
     user = models.ForeignKey(to=User,
                              on_delete=models.SET_NULL,
@@ -89,3 +90,22 @@ class Comment (models.Model):
 
     def __str__(self):
         return f'{self.text[:100]}...'
+
+
+class Banner(models.Model):
+    image = models.ImageField(
+        verbose_name='Изображение', upload_to=upload_instance,
+    )
+    title = models.CharField(verbose_name='Заголовок', max_length=255)
+    description = models.TextField(verbose_name='Описание')
+    product = models.ForeignKey(
+        to=Product, on_delete=models.SET_NULL, related_name='banner',
+        null=True,
+    )
+
+    class Meta:
+        verbose_name = 'Баннер'
+        verbose_name_plural = 'Баннеры'
+
+    def __str__(self):
+        return self.title

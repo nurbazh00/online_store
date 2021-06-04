@@ -17,7 +17,7 @@ class Cart(models.Model):
 
 
     def __str__(self):
-        return f'{self.user.email} - cart: {self.id}'
+        return f'{self.user.email} - корзина: {self.id}'
 
 
 class CartItem(models.Model):
